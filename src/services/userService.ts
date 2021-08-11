@@ -1,3 +1,4 @@
+import { User } from "@auth0/auth0-react";
 import http from "./httpService";
 // import { apiUrl } from "../config.json";
 
@@ -10,6 +11,8 @@ export function register(user) {
   //   name: user.name,
   // });
 }
+
+function transform(user: User) {}
 
 const user = {
   register,

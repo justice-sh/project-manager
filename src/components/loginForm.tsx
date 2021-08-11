@@ -1,7 +1,7 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import auth from "../services/authService";
 
 function LoginForm() {
-  useAuth0().loginWithRedirect();
+  auth.login();
 
   return null;
 }

@@ -1,10 +1,15 @@
 import Joi from "joi";
 import { connect } from "react-redux";
+
 import Project from "../types/project";
+import Form from "./common/form";
+
 import ProjectType from "../types/projectType";
 import SelectOption from "../types/selectOption";
+
 import projectService from "../services/projectService";
-import Form from "./common/form";
+import auth from "../services/authService";
+
 import generatorId from "../utils/idGenerator";
 
 class ProjectForm extends Form {
@@ -31,6 +36,9 @@ class ProjectForm extends Form {
   };
 
   componentDidMount() {
+    if (!auth.getCurrentUser()?.isAdmin)
+      return this.props.history.push("/projects");
+
     const { projects, types } = this.props;
     const { id } = this.props.match.params;
 

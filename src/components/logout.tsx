@@ -1,7 +1,7 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import auth from "../services/authService";
 
 function Logout() {
-  useAuth0().logout({ returnTo: window.location.origin });
+  auth.logout();
 
   return null;
 }

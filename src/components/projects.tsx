@@ -2,19 +2,26 @@ import React from "react";
 import { ToastContainer } from "react-toastify";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
 import ProjectsTable from "./projectsTable";
 import SearchBox from "./common/searchBox";
 import Paginate from "./common/pagination";
 import ListGroup from "./common/listGroup";
+
 import Project from "../types/project";
 import ProjectType from "../types/projectType";
 import SortColumn from "../types/sortColumn";
+
 import projectService from "../services/projectService";
 import typeService from "../services/typeService";
+
 // eslint-disable-next-line
 import log from "../services/logService";
+import auth from "../services/authService";
+
 import { paginate } from "../utils/paginate";
 import { sort } from "../utils/sort";
+
 import seed from "../seed";
 
 interface ProjectsProps {
@@ -124,14 +131,16 @@ class Projects extends React.Component<ProjectsProps, ProjectsState> {
             />
           </div>
           <div className="col">
-            <div className="btn btn-group">
-              <Link to="/projectForm/new" className="btn btn-primary">
-                New Project
-              </Link>
-              <button className="btn btn-danger" onClick={() => seed()}>
-                Seed
-              </button>
-            </div>
+            {auth.getCurrentUser()?.isAdmin && (
+              <div className="btn btn-group">
+                <Link to="/projectForm/new" className="btn btn-primary">
+                  New Project
+                </Link>
+                <button className="btn btn-danger" onClick={() => seed()}>
+                  Seed
+                </button>
+              </div>
+            )}
 
             <SearchBox query={searchQuery} onSearch={this.handleSearch} />
 

@@ -10,15 +10,20 @@ import Profile from "./components/userProfile";
 import LoginForm from "./components/loginForm";
 import Logout from "./components/logout";
 
+// Services
+import auth from "./services/authService";
+
 // Styles
 import "./App.css";
 
 function App() {
-  const auth = useAuth0();
+  auth.setAuth(useAuth0());
+
+  const user = auth.getCurrentUser();
 
   return (
     <main className="container">
-      <NavBar user={auth.user} />
+      <NavBar user={user} />
 
       <Switch>
         <Route path="/projectForm/:id" component={ProjectForm} />
