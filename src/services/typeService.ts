@@ -7,7 +7,12 @@ import dispatch from "..";
 const apiEndpoint = "projectTypes";
 const getReference = () => http.fs().collection(apiEndpoint);
 
-function put(type: ProjectType) {
+// Delete any time. Same with devSeed@projectService.
+function devSeed(types: ProjectType[]) {
+  dispatch({ type: typesAdded.type, payload: { types } });
+}
+
+function add(type: ProjectType) {
   getReference().doc(type.id).set(type).catch(log);
 }
 
@@ -43,8 +48,9 @@ async function clear() {
 const objects = {
   get,
   getAll,
-  put,
+  add,
   clear,
+  devSeed,
 };
 
 export default objects;

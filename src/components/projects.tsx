@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -123,13 +124,14 @@ class Projects extends React.Component<ProjectsProps, ProjectsState> {
       <React.Fragment>
         <ToastContainer />
         <div className="row">
-          <div className="col-3">
+          <ListGroupWrapper className="col-3">
             <ListGroup
               items={types}
               selectedItem={selectedType}
               onItemSelect={this.handleItemSelect}
             />
-          </div>
+          </ListGroupWrapper>
+
           <div className="col">
             {auth.getCurrentUser()?.isAdmin && (
               <div className="btn btn-group">
@@ -163,6 +165,10 @@ class Projects extends React.Component<ProjectsProps, ProjectsState> {
     );
   }
 }
+
+const ListGroupWrapper = styled.div`
+  min-width: 300px;
+`;
 
 const mapStateToProps = (state) => ({
   projects: state.entities.projects,

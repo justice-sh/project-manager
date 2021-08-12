@@ -27,9 +27,9 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
     const { data, columns } = this.props;
 
     return (
-      <tbody>
+      <tbody className="tbody">
         {data.map((item, index) => (
-          <tr key={index}>
+          <tr key={index} className="tbody__tr">
             {columns.map((column) => (
               <td key={this.rand()}>{this.renderCell(item, column)}</td>
             ))}

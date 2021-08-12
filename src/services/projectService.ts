@@ -14,11 +14,17 @@ import {
 const apiEndpoint = "projects";
 const getReference = () => http.fs().collection(apiEndpoint);
 
-function registerListener() {
-  const dispatchAction = (action, payload) => {
-    dispatch({ type: action.type, payload });
-  };
+const dispatchAction = (action, payload) => {
+  dispatch({ type: action.type, payload });
+};
 
+// Delete any time. Same with devSeed@typeService.
+function devSeed(projects: Project) {
+  dispatchAction(projectsAdded, { projects });
+  return toast.info(`Projects loaded`);
+}
+
+function registerListener() {
   const unsubscribe = getReference().onSnapshot({
     next: (snapshot) => {
       const docs = snapshot.docChanges();
@@ -100,6 +106,7 @@ const objects = {
   remove,
   registerListener,
   clear,
+  devSeed,
 };
 
 export default objects;

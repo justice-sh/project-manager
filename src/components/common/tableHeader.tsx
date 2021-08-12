@@ -1,4 +1,5 @@
 import React from "react";
+
 import SortColumn from "../../types/sortColumn";
 import Column from "../../types/column";
 
@@ -31,7 +32,7 @@ class TableHeader extends React.Component<TableHeaderProps, TableHeaderState> {
 
   render() {
     return (
-      <thead>
+      <thead className="thead">
         <tr>
           {this.props.columns.map((column) => (
             <th

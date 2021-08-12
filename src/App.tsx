@@ -22,19 +22,21 @@ function App() {
   const user = auth.getCurrentUser();
 
   return (
-    <main className="container">
-      <NavBar user={user} />
+    <div className="App">
+      <main className="container">
+        <NavBar user={user} />
 
-      <Switch>
-        <Route path="/projectForm/:id" component={ProjectForm} />
-        <Route path="/projects" component={Projects} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/login" component={LoginForm} />
-        <Route path="/logout" component={Logout} />
+        <Switch>
+          <Route path="/projectForm/:id" component={ProjectForm} />
+          <Route path="/projects" component={Projects} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/login" component={LoginForm} />
+          <Route path="/logout" component={Logout} />
 
-        <Redirect from="/" to="/projects" />
-      </Switch>
-    </main>
+          <Redirect from="/" to="/projects" />
+        </Switch>
+      </main>
+    </div>
   );
 }
 

@@ -11,7 +11,7 @@ export default async function seed() {
   const { projects, types } = getData();
 
   projects.forEach((project) => projectService.add(project));
-  types.forEach((type) => typeService.put(type));
+  types.forEach((type) => typeService.add(type));
 }
 
 function getProjectTypes() {
