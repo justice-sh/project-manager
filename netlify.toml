@@ -2,14 +2,3 @@
    from = "/*"
    to = "/index.html"
    status = 200
-
-[build.environment]
-REACT_APP_AUTH_DOMAIN="dev--d1dpdh3.us.auth0.com"
-REACT_APP_AUTH_CLIENTID="fTLvRZWQLW8Oxim6ZEMoNWLEi1KVLLy5"
-REACT_APP_AUTH_REDIRECT_URI="/projects"
-REACT_APP_FB_apiKey="AIzaSyARtm-YiHc_3tRLilK5jwii_OUxLdZXcBQ"
-REACT_APP_FB_authDomain="project-manager-91b06.firebaseapp.com"
-REACT_APP_FB_projectId="project-manager-91b06"
-REACT_APP_FB_storageBucket="project-manager-91b06.appspot.com"
-REACT_APP_FB_messagingSenderId="795302909118"
-REACT_APP_FB_appId="1:795302909118:web:b95cb904ebf1d7c2e13aef"
