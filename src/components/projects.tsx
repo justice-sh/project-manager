@@ -21,7 +21,7 @@ import auth from "../services/authService";
 import { paginate } from "../utils/paginate";
 import { sort } from "../utils/sort";
 
-// import seed from "../seed";
+import seed from "../seed";
 
 interface ProjectsProps {
   projects: Project[];
