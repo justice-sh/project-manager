@@ -8,6 +8,7 @@ import Project from "../types/project";
 import SortColumn from "../types/sortColumn";
 
 import auth from "../services/authService";
+import NoDataFound from "./noDataFound";
 
 export interface ProjectsTableProps {
   projects: Project[];
@@ -27,9 +28,9 @@ class ProjectsTable extends Component<ProjectsTableProps, ProjectsTableState> {
         <Link to={`/projectForm/${project.id}`}>{project.title}</Link>
       ),
     },
+    { path: "type.name", label: "Type" },
     { path: "author", label: "Author" },
     { path: "regNo", label: "Reg. No." },
-    { path: "type.name", label: "Type" },
     { path: "session", label: "Session" },
     {
       key: "delete",
@@ -57,7 +58,8 @@ class ProjectsTable extends Component<ProjectsTableProps, ProjectsTableState> {
   render() {
     const { sortColumn, onSort, projects } = this.props;
 
-    if (projects.length === 0) return <div>Oops. No result found.</div>;
+    // if (projects.length === 0) return <div>Oops... hi</div>;
+    if (projects.length === 0) return <NoDataFound />;
 
     this.removeTitleLink();
 

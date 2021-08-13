@@ -32,19 +32,28 @@ const Wrapper = styled.div`
   min-width: 300px;
   overflow-x: auto;
   border-radius: 7px;
+  &::scrollbar-width {
+    width: 5px;
+  }
+
+  .table {
+    min-width: 800px;
+  }
 
   .thead {
-    background-color: #007bff;
+    /* background-color: #007bff; */
+    background-color: #0d41e1;
     color: white;
   }
 
   .tbody__tr:nth-child(odd) {
-    background-color: #1daddd;
+    color: black;
+    background-color: #b5c6e0;
   }
 
   .tbody__tr:nth-child(even) {
-    background-color: #2c5461;
-    color: white;
+    background-color: #ebf4f5;
+    color: black;
   }
 `;
 

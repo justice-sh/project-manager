@@ -9,6 +9,7 @@ import ProjectForm from "./components/projectForm";
 import Profile from "./components/userProfile";
 import LoginForm from "./components/loginForm";
 import Logout from "./components/logout";
+import ErrorPage from "./components/error";
 
 // Services
 import auth from "./services/authService";
@@ -32,8 +33,10 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/login" component={LoginForm} />
           <Route path="/logout" component={Logout} />
+          <Route path="/error" component={ErrorPage} />
 
-          <Redirect from="/" to="/projects" />
+          <Redirect exact from="/" to="/projects" />
+          <Redirect to="/error" />
         </Switch>
       </main>
     </div>
