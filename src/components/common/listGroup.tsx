@@ -23,11 +23,16 @@ const ListGroup: React.FC<Props> = (props) => {
 
   return (
     <ul className="list-group">
-      {items.map((item) => (
+      {items.map((item, index) => (
         <li
           key={item[idProperty]}
           className={classes(item)}
           onClick={() => onItemSelect(item)}
+          data-aos="fade-zoom-in"
+          data-aos-easing="ease-in-back"
+          data-aos-offset="0"
+          data-aos-delay={index === 0 ? 0 : index * 50}
+          data-aos-duration={index === 0 ? 300 : 1000}
         >
           {item[textProperty]}
         </li>

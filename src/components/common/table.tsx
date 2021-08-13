@@ -30,14 +30,24 @@ const Table: React.FC<TableProps> = ({ columns, sortColumn, data, onSort }) => {
 
 const Wrapper = styled.div`
   min-width: 300px;
-  overflow-x: auto;
+  overflow-x: hidden;
   border-radius: 7px;
-  &::scrollbar-width {
-    width: 5px;
+
+  &::-webkit-scrollbar {
+    width: 6px; // This line is not working. I don't know why.
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #b5c6e0;
   }
 
   .table {
     min-width: 800px;
+    height: 300px;
   }
 
   .thead {
@@ -46,12 +56,16 @@ const Wrapper = styled.div`
     color: white;
   }
 
-  .tbody__tr:nth-child(odd) {
+  .tbody {
+    border: 5px solid #b5c6e0;
+  }
+
+  .tbody__tr:nth-child(odd) .tbody__td {
     color: black;
     background-color: #b5c6e0;
   }
 
-  .tbody__tr:nth-child(even) {
+  .tbody__tr:nth-child(even) .tbody__td {
     background-color: #ebf4f5;
     color: black;
   }

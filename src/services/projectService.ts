@@ -45,7 +45,9 @@ function registerListener() {
         else if (type === "removed")
           dispatchAction(projectDeleted, { project });
 
-        toast.info(`Project ${type}`);
+        type === "added"
+          ? toast.info("Congratulation!")
+          : toast.info(`Project ${type}`);
       });
     },
     error: (error) => log(error),

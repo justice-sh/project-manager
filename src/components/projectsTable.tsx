@@ -2,13 +2,15 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 
 import Table from "./common/table";
+import LottieAnimation from "./common/lottieAnimation";
 
 import Column from "../types/column";
 import Project from "../types/project";
 import SortColumn from "../types/sortColumn";
 
 import auth from "../services/authService";
-import NoDataFound from "./noDataFound";
+
+import animationData from "../media/noDataFound.json";
 
 export interface ProjectsTableProps {
   projects: Project[];
@@ -34,9 +36,22 @@ class ProjectsTable extends Component<ProjectsTableProps, ProjectsTableState> {
     { path: "session", label: "Session" },
     {
       key: "delete",
-      content: this.getDeleteContent,
+      content: this.deleteContent(this.props.onDelete),
     },
   ];
+
+  deleteContent(onDelete) {
+    return function (project: Project) {
+      return auth.getCurrentUser()?.isAdmin ? (
+        <button
+          onClick={() => onDelete(project)}
+          className="btn btn-danger btn-sm"
+        >
+          Delete
+        </button>
+      ) : null;
+    };
+  }
 
   removeTitleLink() {
     if (!auth.getCurrentUser()?.isAdmin) {
@@ -44,22 +59,12 @@ class ProjectsTable extends Component<ProjectsTableProps, ProjectsTableState> {
     }
   }
 
-  getDeleteContent(project: Project) {
-    return auth.getCurrentUser()?.isAdmin ? (
-      <button
-        onClick={() => this.props.onDelete(project)}
-        className="btn btn-danger btn-sm"
-      >
-        Delete
-      </button>
-    ) : null;
-  }
-
   render() {
     const { sortColumn, onSort, projects } = this.props;
 
     // if (projects.length === 0) return <div>Oops... hi</div>;
-    if (projects.length === 0) return <NoDataFound />;
+    if (projects.length === 0)
+      return <LottieAnimation animationData={animationData} width={60} loop />;
 
     this.removeTitleLink();
 

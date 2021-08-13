@@ -1,9 +1,9 @@
 import auth from "../services/authService";
 
-function LoginForm() {
+function Login() {
   auth.login();
 
   return null;
 }
 
-export default LoginForm;
+export default Login;

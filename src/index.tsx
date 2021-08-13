@@ -16,6 +16,7 @@ import getAuthConfig from "./services/authConfig";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 import "react-toastify/dist/ReactToastify.css";
+import "aos/dist/aos.css";
 import "./index.css";
 
 firebase.initializeApp(getConfig());

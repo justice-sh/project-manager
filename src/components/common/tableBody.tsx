@@ -31,7 +31,17 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
         {data.map((item, index) => (
           <tr key={index} className="tbody__tr">
             {columns.map((column) => (
-              <td key={this.rand()}>{this.renderCell(item, column)}</td>
+              <td
+                key={item.path || item.key}
+                className="tbody__td"
+                data-aos="fade-zoom-in"
+                data-aos-easing="ease-in-back"
+                data-aos-offset="0"
+                data-aos-delay={index === 0 ? 0 : index * 50}
+                data-aos-duration={index === 0 ? 300 : 1000}
+              >
+                {this.renderCell(item, column)}
+              </td>
             ))}
           </tr>
         ))}

@@ -16,8 +16,6 @@ import SortColumn from "../types/sortColumn";
 import projectService from "../services/projectService";
 import typeService from "../services/typeService";
 
-// eslint-disable-next-line
-import log from "../services/logService";
 import auth from "../services/authService";
 
 import { paginate } from "../utils/paginate";
@@ -121,16 +119,16 @@ class Projects extends React.Component<ProjectsProps, ProjectsState> {
     const { data, totalCount } = this.getPagedData();
 
     return (
-      <React.Fragment>
+      <div>
         <ToastContainer />
         <div className="row">
-          <ListGroupWrapper className="col-3">
+          <RowColumn className="col-3">
             <ListGroup
               items={types}
               selectedItem={selectedType}
               onItemSelect={this.handleItemSelect}
             />
-          </ListGroupWrapper>
+          </RowColumn>
 
           <div className="col">
             {auth.getCurrentUser()?.isAdmin && (
@@ -138,9 +136,9 @@ class Projects extends React.Component<ProjectsProps, ProjectsState> {
                 <Link to="/projectForm/new" className="btn btn-primary">
                   New Project
                 </Link>
-                <button className="btn btn-danger" onClick={() => seed()}>
+                {/* <button className="btn btn-danger" onClick={() => seed()}>
                   Seed
-                </button>
+                </button> */}
               </div>
             )}
 
@@ -161,13 +159,17 @@ class Projects extends React.Component<ProjectsProps, ProjectsState> {
             />
           </div>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
 
-const ListGroupWrapper = styled.div`
-  min-width: 300px;
+const RowColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 85vh;
+  min-width: 250px;
 `;
 
 const mapStateToProps = (state) => ({
@@ -176,5 +178,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(Projects);
-
-// export default Projects;
