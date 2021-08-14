@@ -19,6 +19,7 @@ import auth from "./services/authService";
 import "./App.css";
 
 function App() {
+  //
   AOS.init();
   auth.setAuth(useAuth0());
 
