@@ -1,9 +1,8 @@
-// Third-party libraries
+import { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import AOS from "aos";
 
-// Components
 import Projects from "./components/projects";
 import NavBar from "./components/navBar";
 import ProjectForm from "./components/projectForm";
@@ -12,15 +11,22 @@ import Login from "./components/login";
 import Logout from "./components/logout";
 import ErrorPage from "./components/error";
 
-// Services
 import auth from "./services/authService";
+import projectService from "./services/projectService";
+import typeService from "./services/typeService";
 
-// Styles
 import "./App.css";
 
 function App() {
-  //
-  AOS.init();
+  useEffect(() => {
+    AOS.init({
+      once: true,
+    });
+
+    projectService.registerListener();
+    typeService.getAll();
+  }, []);
+
   auth.setAuth(useAuth0());
 
   const user = auth.getCurrentUser();

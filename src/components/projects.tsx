@@ -14,13 +14,12 @@ import ProjectType from "../types/projectType";
 import SortColumn from "../types/sortColumn";
 
 import projectService from "../services/projectService";
-import typeService from "../services/typeService";
-
 import auth from "../services/authService";
 
 import { paginate } from "../utils/paginate";
 import { sort } from "../utils/sort";
 
+// eslint-disable-next-line
 import seed from "../seed";
 
 interface ProjectsProps {
@@ -34,7 +33,6 @@ interface ProjectsState {
   currentPage: number;
   pageSize: number;
   selectedType: ProjectType;
-  unsubscribe: () => void;
   types: ProjectType[];
 }
 
@@ -46,16 +44,21 @@ class Projects extends React.Component<ProjectsProps, ProjectsState> {
     currentPage: 1,
     selectedType: { id: "", name: "All Types" },
     types: [],
-    unsubscribe: () => "",
   };
 
-  async componentDidMount() {
-    const { length: projectCount } = this.props.projects;
-    const { length: typeCount } = this.props.types;
+  componentDidMount() {
+    this.setTypes();
+  }
 
-    const types = typeCount ? this.props.types : await typeService.getAll();
+  componentDidUpdate() {
+    this.setTypes();
+  }
 
-    if (!projectCount) projectService.registerListener();
+  setTypes() {
+    const { types } = this.props;
+
+    if (types.length === 0) return;
+    if (this.state.types.length > types.length) return;
 
     this.setState({ types: [this.state.selectedType, ...types] });
   }
@@ -132,13 +135,17 @@ class Projects extends React.Component<ProjectsProps, ProjectsState> {
 
           <div className="col">
             {auth.getCurrentUser()?.isAdmin && (
-              <div className="btn btn-group">
+              <div
+                className="btn btn-group"
+                data-aos="zoom-in-right"
+                data-aos-duration="1000"
+              >
                 <Link to="/projectForm/new" className="btn btn-primary">
                   New Project
                 </Link>
-                {/* <button className="btn btn-danger" onClick={() => seed()}>
+                <button className="btn btn-danger" onClick={() => seed()}>
                   Seed
-                </button> */}
+                </button>
               </div>
             )}
 
@@ -168,8 +175,7 @@ const RowColumn = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: 85vh;
-  min-width: 250px;
+  min-width: 300px;
 `;
 
 const mapStateToProps = (state) => ({

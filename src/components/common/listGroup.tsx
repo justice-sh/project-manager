@@ -31,8 +31,8 @@ const ListGroup: React.FC<Props> = (props) => {
           data-aos="fade-zoom-in"
           data-aos-easing="ease-in-back"
           data-aos-offset="0"
-          data-aos-delay={index === 0 ? 0 : index * 50}
-          data-aos-duration={index === 0 ? 300 : 1000}
+          data-aos-delay={index === 0 ? 200 : index * 400}
+          data-aos-duration={800}
         >
           {item[textProperty]}
         </li>

@@ -17,7 +17,7 @@ class AuthService {
     this.auth.logout({ returnTo: window.location.origin });
   }
 
-  getCurrentUser(): User | null {
+  getCurrentUser(): null | User {
     const { user } = this.auth;
     const namespace = "http://localhost/";
 

@@ -46,6 +46,8 @@ class ProjectsTable extends Component<ProjectsTableProps, ProjectsTableState> {
         <button
           onClick={() => onDelete(project)}
           className="btn btn-danger btn-sm"
+          data-aos="zoom-in-right"
+          data-aos-duration={1500}
         >
           Delete
         </button>

@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import SortColumn from "../../types/sortColumn";
 import Column from "../../types/column";
@@ -32,7 +33,7 @@ class TableHeader extends React.Component<TableHeaderProps, TableHeaderState> {
 
   render() {
     return (
-      <thead className="thead">
+      <Thead className="thead">
         <tr>
           {this.props.columns.map((column) => (
             <th
@@ -44,9 +45,14 @@ class TableHeader extends React.Component<TableHeaderProps, TableHeaderState> {
             </th>
           ))}
         </tr>
-      </thead>
+      </Thead>
     );
   }
 }
+
+const Thead = styled.thead`
+  background-color: #007bff;
+  color: white;
+`;
 
 export default TableHeader;

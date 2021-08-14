@@ -29,8 +29,7 @@ const Table: React.FC<TableProps> = ({ columns, sortColumn, data, onSort }) => {
 };
 
 const Wrapper = styled.div`
-  min-width: 300px;
-  overflow-x: hidden;
+  min-width: 250px;
   border-radius: 7px;
 
   &::-webkit-scrollbar {
@@ -50,24 +49,8 @@ const Wrapper = styled.div`
     height: 300px;
   }
 
-  .thead {
-    /* background-color: #007bff; */
-    background-color: #0d41e1;
-    color: white;
-  }
-
-  .tbody {
-    border: 5px solid #b5c6e0;
-  }
-
-  .tbody__tr:nth-child(odd) .tbody__td {
-    color: black;
-    background-color: #b5c6e0;
-  }
-
-  .tbody__tr:nth-child(even) .tbody__td {
-    background-color: #ebf4f5;
-    color: black;
+  @media (max-width: 992px) {
+    overflow-x: auto;
   }
 `;
 

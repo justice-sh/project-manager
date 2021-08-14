@@ -1,9 +1,12 @@
 import React from "react";
+import styled from "styled-components";
+
 import Column from "../../types/column";
 
 export interface TableBodyProps {
   data: any[];
   columns: Column[];
+  idProperty?: string;
 }
 
 export interface TableBodyState {}
@@ -21,33 +24,45 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
     return this.getProperty(item, column.path);
   };
 
-  rand = () => Math.random() * 1000;
+  // rand = () => Math.random() * 1000;
 
   render() {
-    const { data, columns } = this.props;
+    const { data, columns, idProperty = "id" } = this.props;
 
     return (
-      <tbody className="tbody">
+      <Tbody className="tbody">
         {data.map((item, index) => (
-          <tr key={index} className="tbody__tr">
+          <tr
+            key={item[idProperty]}
+            className="tbody__tr"
+            data-aos="zoom-in"
+            data-aos-delay={index === 0 ? 100 : 200 * index}
+            data-aos-duration={600}
+          >
             {columns.map((column) => (
-              <td
-                key={item.path || item.key}
-                className="tbody__td"
-                data-aos="fade-zoom-in"
-                data-aos-easing="ease-in-back"
-                data-aos-offset="0"
-                data-aos-delay={index === 0 ? 0 : index * 50}
-                data-aos-duration={index === 0 ? 300 : 1000}
-              >
+              <td key={column.path || column.key} className="tbody__td">
                 {this.renderCell(item, column)}
               </td>
             ))}
           </tr>
         ))}
-      </tbody>
+      </Tbody>
     );
   }
 }
+
+const Tbody = styled.tbody`
+  border: 1px solid #b5c6e0;
+
+  .tbody__tr:nth-child(odd) .tbody__td {
+    color: black;
+    background-color: #b5c6e0;
+  }
+
+  .tbody__tr:nth-child(even) .tbody__td {
+    background-color: #ebf4f5;
+    color: black;
+  }
+`;
 
 export default TableBody;
