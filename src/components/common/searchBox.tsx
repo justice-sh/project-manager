@@ -12,6 +12,8 @@ const SearchBox: React.FC<SearchBoxProps> = ({ query, onSearch }) => {
       placeholder="Search..."
       value={query}
       onChange={(e) => onSearch(e.currentTarget.value)}
+      data-aos="fade-in"
+      data-aos-duration={2000}
     />
   );
 };

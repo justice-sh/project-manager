@@ -8,7 +8,8 @@ import { Auth0Provider } from "@auth0/auth0-react";
 
 import App from "./App";
 
-import configureAppStore from "./store/configureStore";
+import storeObject from "./store";
+
 import getConfig from "./services/config";
 import getAuthConfig from "./services/authConfig";
 
@@ -21,14 +22,10 @@ import "./index.css";
 
 firebase.initializeApp(getConfig());
 
-const store = configureAppStore();
-
-export default store.dispatch;
-
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider {...getAuthConfig()}>
-      <Provider store={store}>
+      <Provider store={storeObject.store}>
         <BrowserRouter>
           <App />
         </BrowserRouter>

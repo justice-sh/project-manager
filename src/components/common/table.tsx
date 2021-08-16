@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import TableBody from "./tableBody";
-import TableHeader from "./tableHeader";
+import TableHead from "./tableHead";
 
 import Column from "../../types/column";
 import SortColumn from "../../types/sortColumn";
@@ -17,11 +17,7 @@ const Table: React.FC<TableProps> = ({ columns, sortColumn, data, onSort }) => {
   return (
     <Wrapper>
       <table className="table">
-        <TableHeader
-          columns={columns}
-          onSort={onSort}
-          sortColumn={sortColumn}
-        />
+        <TableHead columns={columns} onSort={onSort} sortColumn={sortColumn} />
         <TableBody data={data} columns={columns} />
       </table>
     </Wrapper>

@@ -1,15 +1,17 @@
 import ProjectType from "../types/projectType";
+
 import http from "./httpService";
 import log from "./logService";
+
+import store from "../store";
 import { typesAdded, typesCleared } from "../store/projectTypes";
-import dispatch from "..";
 
 const apiEndpoint = "projectTypes";
 const getReference = () => http.fs().collection(apiEndpoint);
 
 // Delete any time. Same with devSeed@projectService.
 function devSeed(types: ProjectType[]) {
-  dispatch({ type: typesAdded.type, payload: { types } });
+  store.dispatch(typesAdded, { types });
 }
 
 function add(type: ProjectType) {
@@ -20,7 +22,7 @@ async function getAll() {
   try {
     const result = await getReference().get();
     const types = result.docs.map((doc) => doc.data());
-    dispatch({ type: typesAdded.type, payload: { types } });
+    store.dispatch(typesAdded, { types });
     return types as ProjectType[];
   } catch (error) {
     log(error);
@@ -37,7 +39,7 @@ function get(id: string) {
 }
 
 async function clear() {
-  dispatch({ type: typesCleared.type });
+  store.dispatch(typesCleared.type, {});
 
   return getReference()
     .get()

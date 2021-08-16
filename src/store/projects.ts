@@ -27,8 +27,6 @@ const slice = createSlice({
   },
 });
 
-export default slice.reducer;
-
 export const {
   projectAdded,
   projectDeleted,
@@ -37,6 +35,13 @@ export const {
   projectsCleared,
 } = slice.actions;
 
+export default slice.reducer;
+
 export const projectSelector = (state) => ({
   projects: state.entities.projects,
 });
+
+export const getLastProject = (state) => {
+  const { length } = state.entities.projects;
+  return state.entities.projects[length - 1];
+};

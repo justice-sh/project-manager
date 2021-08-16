@@ -1,8 +1,14 @@
 import { toast } from "react-toastify";
+
 import Project from "../types/project";
+
 import http from "./httpService";
 import log from "./logService";
-import dispatch from "..";
+
+import store from "../store";
+
+import { congratsToggled } from "../store/ui";
+import { loaded } from "../store/ui";
 import {
   projectAdded,
   projectDeleted,
@@ -14,13 +20,9 @@ import {
 const apiEndpoint = "projects";
 const getReference = () => http.fs().collection(apiEndpoint);
 
-const dispatchAction = (action, payload) => {
-  dispatch({ type: action.type, payload });
-};
-
 // Delete any time. Same with devSeed@typeService.
 function devSeed(projects: Project) {
-  dispatchAction(projectsAdded, { projects });
+  store.dispatch(projectsAdded, { projects });
   return toast.info(`Projects loaded`);
 }
 
@@ -31,7 +33,8 @@ function registerListener() {
 
       if (docs.length > 1 && docs[0].type === "added") {
         const projects = docs.map((value) => value.doc.data());
-        dispatchAction(projectsAdded, { projects });
+        store.dispatch(projectsAdded, { projects });
+        store.dispatch(loaded, {});
         return toast.info(`Projects loaded`);
       }
 
@@ -39,14 +42,14 @@ function registerListener() {
         const { type, doc } = change;
         const project = doc.data();
 
-        if (type === "added") dispatchAction(projectAdded, { project });
+        if (type === "added") store.dispatch(projectAdded, { project });
         else if (type === "modified")
-          dispatchAction(projectUpdated, { project });
+          store.dispatch(projectUpdated, { project });
         else if (type === "removed")
-          dispatchAction(projectDeleted, { project });
+          store.dispatch(projectDeleted, { project });
 
         type === "added"
-          ? toast.info("Congratulation!")
+          ? store.dispatch(congratsToggled, { congrats: true })
           : toast.info(`Project ${type}`);
       });
     },
@@ -92,7 +95,7 @@ function remove(id: string) {
 }
 
 async function clear() {
-  dispatch({ type: projectsCleared.type });
+  store.dispatch(projectsCleared, {});
 
   return getReference()
     .get()

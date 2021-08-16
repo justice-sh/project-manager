@@ -35,7 +35,7 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
           <tr
             key={item[idProperty]}
             className="tbody__tr"
-            data-aos="zoom-in"
+            data-aos="flip-down"
             data-aos-delay={index === 0 ? 100 : 200 * index}
             data-aos-duration={600}
           >

@@ -4,15 +4,15 @@ import styled from "styled-components";
 import SortColumn from "../../types/sortColumn";
 import Column from "../../types/column";
 
-export interface TableHeaderProps {
+export interface TableHeadProps {
   columns: Column[];
   sortColumn: SortColumn;
   onSort: (sortColumn: SortColumn) => void;
 }
 
-export interface TableHeaderState {}
+export interface TableHeadState {}
 
-class TableHeader extends React.Component<TableHeaderProps, TableHeaderState> {
+class TableHead extends React.Component<TableHeadProps, TableHeadState> {
   raiseSort = (path: string) => {
     let sortColumn = { ...this.props.sortColumn };
 
@@ -33,7 +33,7 @@ class TableHeader extends React.Component<TableHeaderProps, TableHeaderState> {
 
   render() {
     return (
-      <Thead className="thead">
+      <Thead className="thead" data-aos="fade" data-aos-duration={1000}>
         <tr>
           {this.props.columns.map((column) => (
             <th
@@ -55,4 +55,4 @@ const Thead = styled.thead`
   color: white;
 `;
 
-export default TableHeader;
+export default TableHead;

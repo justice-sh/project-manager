@@ -4,10 +4,13 @@ import { ToastContainer } from "react-toastify";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import Congrats from "./congrats";
+
 import ProjectsTable from "./projectsTable";
 import SearchBox from "./common/searchBox";
 import Paginate from "./common/pagination";
 import ListGroup from "./common/listGroup";
+import LottieAnimation from "./common/lottieAnimation";
 
 import Project from "../types/project";
 import ProjectType from "../types/projectType";
@@ -19,12 +22,16 @@ import auth from "../services/authService";
 import { paginate } from "../utils/paginate";
 import { sort } from "../utils/sort";
 
+import loader from "../media/loader.json";
+
 // eslint-disable-next-line
 import seed from "../seed";
 
 interface ProjectsProps {
   projects: Project[];
   types: ProjectType[];
+  isLoading: boolean;
+  congrats: boolean;
 }
 
 interface ProjectsState {
@@ -119,7 +126,14 @@ class Projects extends React.Component<ProjectsProps, ProjectsState> {
       types,
     } = this.state;
 
+    const { isLoading, congrats } = this.props;
+
     const { data, totalCount } = this.getPagedData();
+
+    if (isLoading)
+      return <LottieAnimation animationData={loader} loop width={20} />;
+
+    if (congrats) return <Congrats />;
 
     return (
       <div>
@@ -181,6 +195,8 @@ const RowColumn = styled.div`
 const mapStateToProps = (state) => ({
   projects: state.entities.projects,
   types: state.entities.types,
+  isLoading: state.ui.isLoading,
+  congrats: state.ui.congrats,
 });
 
 export default connect(mapStateToProps)(Projects);
