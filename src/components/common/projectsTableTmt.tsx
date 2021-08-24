@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
 
 import Table from "./table";
 import LottieAnimation from "./lottieAnimation";
@@ -22,23 +21,7 @@ export interface ProjectsTableProps {
 export interface ProjectsTableState {}
 
 class ProjectsTable extends Component<ProjectsTableProps, ProjectsTableState> {
-  columns: Column[] = [
-    {
-      path: "title",
-      label: "Title",
-      content: (project: Project) => (
-        <Link to={`/projectForm/${project.id}`}>{project.title}</Link>
-      ),
-    },
-    { path: "type.name", label: "Type" },
-    { path: "author", label: "Author" },
-    { path: "regNo", label: "Reg. No." },
-    { path: "session", label: "Session" },
-    {
-      key: "delete",
-      content: this.deleteContent(this.props.onDelete),
-    },
-  ];
+  columns: Column[] = []; // should be provided by the child component.
 
   deleteContent(onDelete) {
     return function (project: Project) {
