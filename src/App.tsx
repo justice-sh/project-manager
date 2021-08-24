@@ -4,6 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import AOS from "aos";
 
 import Projects from "./components/projects";
+import Featured from "./components/featured";
 import NavBar from "./components/navBar";
 import ProjectForm from "./components/projectForm";
 import Profile from "./components/userProfile";
@@ -38,7 +39,8 @@ function App() {
 
         <Switch>
           <Route path="/projectForm/:id" component={ProjectForm} />
-          <Route exact path="/projects" component={Projects} />
+          <Route path="/projects" component={Projects} />
+          <Route path="/featured" component={Featured} />
           <Route path="/profile" component={Profile} />
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />

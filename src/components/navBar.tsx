@@ -28,6 +28,9 @@ const NavBar: React.FC<NavBarProps> = ({ user }) => {
             <NavLink className="nav-link nav-item" to="/projects">
               Projects
             </NavLink>
+            <NavLink className="nav-link nav-item" to="/featured">
+              Featured
+            </NavLink>
             {!user && (
               <NavLink className="nav-link nav-item" to="/login">
                 Login

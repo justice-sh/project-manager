@@ -1,13 +1,12 @@
 import { connect } from "react-redux";
 
-import ProjectsTable from "./projectsTable";
+import FeaturedTable from "./featuredTable";
+import ProjectsTmt from "./common/projectsTmt";
 
-import ProjTemplate from "./common/projectsTmt";
-
-class Projects extends ProjTemplate {
+class featuredProjects extends ProjectsTmt {
   renderProjectsTable(data, sortColumn) {
     return (
-      <ProjectsTable
+      <FeaturedTable
         projects={data}
         sortColumn={sortColumn}
         onSort={this.handleSort}
@@ -33,4 +32,4 @@ const mapStateToProps = (state) => ({
   congrats: state.ui.congrats,
 });
 
-export default connect(mapStateToProps)(Projects);
+export default connect(mapStateToProps)(featuredProjects);
