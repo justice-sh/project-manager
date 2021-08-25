@@ -6,7 +6,6 @@ import http from "./httpService";
 import log from "./logService";
 
 import store from "../store";
-
 import { congratsToggled } from "../store/ui";
 import { loaded } from "../store/ui";
 import {
@@ -17,17 +16,10 @@ import {
   projectsCleared,
 } from "../store/projects";
 
-const apiEndpoint = "projects";
-const getReference = () => http.fs().collection(apiEndpoint);
-
-// Delete any time. Same with devSeed@typeService.
-function devSeed(projects: Project) {
-  store.dispatch(projectsAdded, { projects });
-  return toast.info(`Projects loaded`);
-}
+const ref = () => http.fs().collection("projects");
 
 function registerListener() {
-  const unsubscribe = getReference().onSnapshot({
+  const unsubscribe = ref().onSnapshot({
     next: (snapshot) => {
       const docs = snapshot.docChanges();
 
@@ -60,47 +52,59 @@ function registerListener() {
 }
 
 function getAll() {
-  return getReference()
+  return ref()
     .get()
-    .then((result) => result.docs.map((doc) => doc.data()))
-    .catch(log);
+    .then(
+      (value) => value.docs.map((doc) => doc.data()),
+      (reason) => log(reason)
+    );
 }
 
 function get(id: string) {
-  return getReference()
+  return ref()
     .doc(id)
     .get()
-    .then((doc) => doc.data() as Project)
-    .catch(log);
+    .then(
+      (value) => value.data() as Project,
+      (reason) => log(reason)
+    );
 }
 
 function add(project: Project) {
-  return getReference()
+  return ref()
     .doc(project.id)
     .set(project)
-    .then((doc) => project)
-    .catch(log);
+    .then(
+      (value) => project,
+      (reason) => log(reason)
+    );
 }
 
 function update(project: Project) {
-  return getReference()
+  const update = { ...project, lastModified: Date.now() };
+
+  return ref()
     .doc(project.id)
-    .update({ ...project, lastModified: Date.now() })
-    .then((doc) => project)
-    .catch(log);
+    .update(update)
+    .then(
+      (value) => update,
+      (reason) => log(reason)
+    );
 }
 
 function remove(id: string) {
-  return getReference().doc(id).delete().catch(log);
+  return ref().doc(id).delete().catch(log);
 }
 
 async function clear() {
   store.dispatch(projectsCleared, {});
 
-  return getReference()
+  return ref()
     .get()
-    .then((value) => value.docs.forEach((doc) => doc.ref.delete()))
-    .catch(log);
+    .then(
+      (value) => value.docs.forEach((doc) => doc.ref.delete()),
+      (reason) => log(reason)
+    );
 }
 
 const objects = {
@@ -111,7 +115,6 @@ const objects = {
   remove,
   registerListener,
   clear,
-  devSeed,
 };
 
 export default objects;

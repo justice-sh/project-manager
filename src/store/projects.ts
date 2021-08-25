@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import Project from "../types/project";
+
 const slice = createSlice({
   name: "projects",
-  initialState: [],
+  initialState: [] as Project[],
   reducers: {
     projectAdded: (state, action) => {
       state.push(action.payload.project);
@@ -17,13 +19,9 @@ const slice = createSlice({
       return state.filter((p) => p.id !== action.payload.project.id);
     },
 
-    projectsAdded: (state, action) => {
-      return action.payload.projects;
-    },
+    projectsAdded: (state, action) => action.payload.projects,
 
-    projectsCleared: (state, action) => {
-      return [];
-    },
+    projectsCleared: (state, action) => [],
   },
 });
 

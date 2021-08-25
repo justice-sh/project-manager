@@ -1,12 +1,16 @@
 import projectService from "./services/projectService";
 import typeService from "./services/typeService";
+import featuredService from "./services/featuredService";
+
 import Project from "./types/project";
 import ProjectType from "./types/projectType";
+
 import generatorId from "./utils/idGenerator";
 
 export default async function seed() {
+  featuredService.clear();
+  typeService.clear();
   await projectService.clear();
-  await typeService.clear();
 
   const { projects, types } = getData();
 
