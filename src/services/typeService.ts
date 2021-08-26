@@ -9,9 +9,19 @@ import { typesAdded, typesCleared } from "../store/projectTypes";
 const apiEndpoint = "projectTypes";
 const getReference = () => http.fs().collection(apiEndpoint);
 
-// Delete any time. Same with devSeed@projectService.
-function devSeed(types: ProjectType[]) {
-  store.dispatch(typesAdded, { types });
+function addListener() {
+  getReference().onSnapshot({
+    next: (snapshot) => {
+      const changes = snapshot.docChanges();
+
+      if (changes.length > 1) {
+        const types = changes.map((change) => change.doc.data());
+        store.dispatch(typesAdded, { types });
+      }
+    },
+
+    error: (error) => log(error),
+  });
 }
 
 function add(type: ProjectType) {
@@ -22,18 +32,6 @@ function add(type: ProjectType) {
       (value) => value,
       (reason) => log(reason)
     );
-}
-
-async function getAll() {
-  try {
-    const result = await getReference().get();
-    const types = result.docs.map((doc) => doc.data());
-    store.dispatch(typesAdded, { types });
-    return types as ProjectType[];
-  } catch (error) {
-    log(error);
-    return [];
-  }
 }
 
 function get(id: string) {
@@ -57,10 +55,9 @@ async function clear() {
 
 const objects = {
   get,
-  getAll,
   add,
   clear,
-  devSeed,
+  addListener,
 };
 
 export default objects;

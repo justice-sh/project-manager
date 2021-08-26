@@ -26,7 +26,7 @@ class FeaturedProjects extends ProjectsTmt {
     return (
       <div>
         {this.renderLoader()}
-        {/* {this.renderPage()} */}
+        {this.renderPage()}
       </div>
     );
   }

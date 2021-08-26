@@ -14,10 +14,9 @@ class ProjectsTable extends Template {
         <Link to={`/projectForm/${project.id}`}>{project.title}</Link>
       ),
     },
+    { path: "description", label: "Description" },
+    { path: "sponsored", label: "Sponsored" },
     { path: "type.name", label: "Type" },
-    { path: "author", label: "Author" },
-    { path: "regNo", label: "Reg. No." },
-    { path: "session", label: "Session" },
     {
       key: "delete",
       content: this.deleteContent(this.props.onDelete),

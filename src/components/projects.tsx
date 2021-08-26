@@ -8,9 +8,10 @@ import projectService from "../services/projectService";
 import { RootState } from "../store";
 
 class Projects extends ProjTemplate {
-  componentDidMount(): void {
+  componentDidMount() {
     if (this.props.projects.length === 0) projectService.registerListener();
   }
+
   renderProjectsTable(data, sortColumn) {
     return (
       <ProjectsTable

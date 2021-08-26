@@ -23,7 +23,7 @@ function App() {
       once: true,
     });
 
-    typeService.getAll();
+    typeService.addListener();
   }, []);
 
   auth.setAuth(useAuth0());

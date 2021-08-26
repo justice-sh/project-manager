@@ -49,21 +49,15 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
     types: [],
   };
 
-  componentDidMount() {
-    this.setTypes();
-  }
-
-  componentDidUpdate() {
-    this.setTypes();
-  }
-
   setTypes() {
-    const { types } = this.props;
+    setTimeout(() => {
+      const { types } = this.props;
 
-    if (types.length === 0) return;
-    if (this.state.types.length > types.length) return;
+      if (types.length === 0) return;
+      if (this.state.types.length > types.length) return;
 
-    this.setState({ types: [this.state.selectedType, ...types] });
+      this.setState({ types: [this.state.selectedType, ...types] });
+    }, 500);
   }
 
   handleSort = (sortColumn) => {
@@ -120,7 +114,8 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
   renderProjectsTable(data, sortColumn) {
     return (
       <div>
-        Please render your table component here @{this.renderProjectsTable.name}
+        Please replace this component with your table component by return your
+        table component here @{this.renderProjectsTable.name}
       </div>
     );
   }
@@ -138,6 +133,8 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
     } = this.state;
 
     const { data, totalCount } = this.getPagedData();
+
+    this.setTypes();
 
     return (
       <>
