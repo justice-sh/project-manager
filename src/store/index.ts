@@ -6,14 +6,16 @@ import { getLastProject } from "./projects";
 class Store {
   private store = configureStore({ reducer });
 
-  configureStore() {}
+  getStore() {
+    return this.store;
+  }
 
   getState() {
     return this.store.getState();
   }
 
   dispatch(action, payload) {
-    this.store.dispatch({ type: action.type, payload });
+    this.store.dispatch({ type: action.type, payload: payload });
   }
 
   getLastProject() {
@@ -22,4 +24,7 @@ class Store {
 }
 
 const store = new Store();
+
+export type RootState = ReturnType<typeof store.getState>;
+
 export default store;

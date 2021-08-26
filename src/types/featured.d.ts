@@ -5,7 +5,6 @@ export default interface Featured {
   title: string;
   description: string;
   sponsored: boolean;
-  registered: boolean;
   createdAt: number;
   type: ProjectType;
 }

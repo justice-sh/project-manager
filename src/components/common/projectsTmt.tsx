@@ -22,9 +22,10 @@ import loader from "../../media/loader.json";
 
 // eslint-disable-next-line
 import seed from "../../seed";
+import Featured from "../../types/featured";
 
 export interface TemplateProps {
-  projects: Project[];
+  projects: (Project | Featured)[];
   types: ProjectType[];
   isLoading: boolean;
 }
@@ -151,7 +152,7 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
           </RowColumn>
 
           <div className="col">
-            {auth.getCurrentUser()?.isAdmin && (
+            {!auth.getCurrentUser()?.isAdmin && (
               <div
                 className="btn btn-group"
                 data-aos="zoom-in-right"

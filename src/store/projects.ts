@@ -1,25 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+import { RootState } from ".";
 
 import Project from "../types/project";
+
+type PayloadProject = PayloadAction<{ project: Project }>;
 
 const slice = createSlice({
   name: "projects",
   initialState: [] as Project[],
   reducers: {
-    projectAdded: (state, action) => {
+    projectAdded: (state, action: PayloadProject) => {
       state.push(action.payload.project);
     },
 
-    projectUpdated: (state, action) => {
+    projectUpdated: (state, action: PayloadProject) => {
       const index = state.findIndex((p) => p.id === action.payload.project.id);
       state[index] = action.payload.project;
     },
 
-    projectDeleted: (state, action) => {
+    projectDeleted: (state, action: PayloadProject) => {
       return state.filter((p) => p.id !== action.payload.project.id);
     },
 
-    projectsAdded: (state, action) => action.payload.projects,
+    projectsAdded: (state, action: PayloadAction<{ projects: [] }>) => {
+      return action.payload.projects;
+    },
 
     projectsCleared: (state, action) => [],
   },
@@ -35,11 +41,11 @@ export const {
 
 export default slice.reducer;
 
-export const projectSelector = (state) => ({
+export const projectSelector = (state: RootState) => ({
   projects: state.entities.projects,
 });
 
-export const getLastProject = (state) => {
+export const getLastProject = (state: RootState) => {
   const { length } = state.entities.projects;
   return state.entities.projects[length - 1];
 };

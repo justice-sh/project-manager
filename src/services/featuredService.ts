@@ -23,9 +23,9 @@ function registerListener() {
       const docs = snapshot.docChanges();
 
       if (docs.length > 1) {
-        const featureds = docs.map((change) => change.doc.data());
-        store.dispatch(featuredsAdded, { featureds });
-        toast.info("Featured projects loaded");
+        const list = docs.map((change) => change.doc.data());
+        store.dispatch(featuredsAdded, { list });
+        return toast.info("Featured projects loaded");
       }
 
       docs.forEach((change) => {
@@ -48,12 +48,24 @@ function registerListener() {
   return unsubscribe;
 }
 
+function add(project: Featured) {
+  ref()
+    .doc(project.id)
+    .set(project)
+    .then(
+      (value) => value,
+      (reason) => log(reason)
+    );
+}
+
 function remove(id: string) {
   ref().doc(id).delete().catch(log);
 }
 
 function clear() {
-  ref()
+  store.dispatch(cleared, { list: [] });
+
+  return ref()
     .get()
     .then(
       (value) => value.docs.forEach((doc) => doc.ref.delete()),
@@ -61,6 +73,6 @@ function clear() {
     );
 }
 
-const services = { registerListener, clear };
+const services = { registerListener, clear, add, remove };
 
 export default services;

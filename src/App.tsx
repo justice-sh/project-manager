@@ -13,7 +13,6 @@ import Logout from "./components/logout";
 import ErrorPage from "./components/error";
 
 import auth from "./services/authService";
-import projectService from "./services/projectService";
 import typeService from "./services/typeService";
 
 import "./App.css";
@@ -24,7 +23,6 @@ function App() {
       once: true,
     });
 
-    projectService.registerListener();
     typeService.getAll();
   }, []);
 

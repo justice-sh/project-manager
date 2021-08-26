@@ -8,9 +8,7 @@ const slice = createSlice({
       return action.payload.types;
     },
 
-    typesCleared: (state, action) => {
-      return [];
-    },
+    typesCleared: (state, action) => [],
   },
 });
 

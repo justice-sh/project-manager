@@ -15,7 +15,13 @@ function devSeed(types: ProjectType[]) {
 }
 
 function add(type: ProjectType) {
-  getReference().doc(type.id).set(type).catch(log);
+  getReference()
+    .doc(type.id)
+    .set(type)
+    .then(
+      (value) => value,
+      (reason) => log(reason)
+    );
 }
 
 async function getAll() {
@@ -39,12 +45,14 @@ function get(id: string) {
 }
 
 async function clear() {
-  store.dispatch(typesCleared.type, {});
+  store.dispatch(typesCleared, { list: [] });
 
   return getReference()
     .get()
-    .then((value) => value.docs.forEach((doc) => doc.ref.delete()))
-    .catch(log);
+    .then(
+      (value) => value.docs.forEach((doc) => doc.ref.delete()),
+      (reason) => log(reason)
+    );
 }
 
 const objects = {

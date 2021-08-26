@@ -3,19 +3,21 @@ import typeService from "./services/typeService";
 import featuredService from "./services/featuredService";
 
 import Project from "./types/project";
+import Featured from "./types/featured";
 import ProjectType from "./types/projectType";
 
 import generatorId from "./utils/idGenerator";
 
 export default async function seed() {
-  featuredService.clear();
-  typeService.clear();
+  await featuredService.clear();
+  await typeService.clear();
   await projectService.clear();
 
-  const { projects, types } = getData();
+  const { projects, types, featured } = getData();
 
   projects.forEach((project) => projectService.add(project));
   types.forEach((type) => typeService.add(type));
+  featured.forEach((project) => featuredService.add(project));
 }
 
 function getProjectTypes() {
@@ -70,7 +72,22 @@ function getData() {
     ),
   ];
 
-  return { types, projects };
+  const featured = [
+    createFeatured(
+      "Result management system",
+      true,
+      types[0],
+      "a system to automate the processes of result computation and management in secondary schools, thereby reducing the work to a few clicks of buttons. "
+    ),
+    createFeatured(
+      "Project management system",
+      true,
+      types[0],
+      "a system to keep track of all projects done by students in a university, available projects for students to do, as well as sponsored projects from companies who will be willing to pay/sponsor the student who would build the project, and possibly employ such student."
+    ),
+  ];
+
+  return { types, projects, featured };
 }
 
 function createProject(title, author, regNo, type: ProjectType): Project {
@@ -83,6 +100,22 @@ function createProject(title, author, regNo, type: ProjectType): Project {
     session: getSession(),
     createdAt: Date.now(),
     lastModified: Date.now(),
+  };
+}
+
+function createFeatured(
+  title,
+  sponsored: boolean,
+  type: ProjectType,
+  description
+): Featured {
+  return {
+    id: generatorId(),
+    title,
+    sponsored,
+    type,
+    description,
+    createdAt: Date.now(),
   };
 }
 

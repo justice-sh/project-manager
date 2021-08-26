@@ -97,7 +97,7 @@ function remove(id: string) {
 }
 
 async function clear() {
-  store.dispatch(projectsCleared, {});
+  store.dispatch(projectsCleared, { projects: [] });
 
   return ref()
     .get()

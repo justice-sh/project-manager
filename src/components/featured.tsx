@@ -3,7 +3,14 @@ import { connect } from "react-redux";
 import FeaturedTable from "./featuredTable";
 import ProjectsTmt from "./common/projectsTmt";
 
-class featuredProjects extends ProjectsTmt {
+import featuredService from "../services/featuredService";
+import { RootState } from "../store";
+
+class FeaturedProjects extends ProjectsTmt {
+  componentDidMount() {
+    if (this.props.projects.length === 0) featuredService.registerListener();
+  }
+
   renderProjectsTable(data, sortColumn) {
     return (
       <FeaturedTable
@@ -19,17 +26,17 @@ class featuredProjects extends ProjectsTmt {
     return (
       <div>
         {this.renderLoader()}
-        {this.renderPage()}
+        {/* {this.renderPage()} */}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  projects: state.entities.projects,
+const mapStateToProps = (state: RootState) => ({
+  projects: state.entities.featured,
   types: state.entities.types,
   isLoading: state.ui.isLoading,
   congrats: state.ui.congrats,
 });
 
-export default connect(mapStateToProps)(featuredProjects);
+export default connect(mapStateToProps)(FeaturedProjects);
