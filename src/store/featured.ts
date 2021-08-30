@@ -25,8 +25,6 @@ const slice = createSlice({
     featuredsAdded: (state, action: PayloadAction<{ list: Featured[] }>) => {
       return action.payload.list;
     },
-
-    cleared: (state, action) => [],
   },
 });
 
@@ -34,7 +32,6 @@ export const {
   featuredAdded,
   featuredRemoved,
   featuredUpdated,
-  cleared,
   featuredsAdded,
 } = slice.actions;
 

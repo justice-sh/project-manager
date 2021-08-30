@@ -114,8 +114,8 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
   renderProjectsTable(data, sortColumn) {
     return (
       <div>
-        Please replace this component with your table component by return your
-        table component here @{this.renderProjectsTable.name}
+        Please replace this component with your table component by returning
+        your table component here @{this.renderProjectsTable.name}
       </div>
     );
   }
@@ -149,7 +149,7 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
           </RowColumn>
 
           <div className="col">
-            {!auth.getCurrentUser()?.isAdmin && (
+            {auth.getCurrentUser()?.isAdmin && (
               <div
                 className="btn btn-group"
                 data-aos="zoom-in-right"

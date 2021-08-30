@@ -26,18 +26,11 @@ const slice = createSlice({
     projectsAdded: (state, action: PayloadAction<{ projects: [] }>) => {
       return action.payload.projects;
     },
-
-    projectsCleared: (state, action) => [],
   },
 });
 
-export const {
-  projectAdded,
-  projectDeleted,
-  projectUpdated,
-  projectsAdded,
-  projectsCleared,
-} = slice.actions;
+export const { projectAdded, projectDeleted, projectUpdated, projectsAdded } =
+  slice.actions;
 
 export default slice.reducer;
 

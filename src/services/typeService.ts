@@ -4,7 +4,7 @@ import http from "./httpService";
 import log from "./logService";
 
 import store from "../store";
-import { typesAdded, typesCleared } from "../store/projectTypes";
+import { typeAdded, typesAdded, typesCleared } from "../store/projectTypes";
 
 const apiEndpoint = "projectTypes";
 const getReference = () => http.fs().collection(apiEndpoint);
@@ -14,10 +14,13 @@ function addListener() {
     next: (snapshot) => {
       const changes = snapshot.docChanges();
 
-      if (changes.length > 1) {
+      if (changes.length > 1 && changes[0].type) {
         const types = changes.map((change) => change.doc.data());
-        store.dispatch(typesAdded, { types });
+        return store.dispatch(typesAdded, { types });
       }
+
+      if (changes[0].type === "added")
+        store.dispatch(typeAdded, { type: changes[0].doc.data() });
     },
 
     error: (error) => log(error),

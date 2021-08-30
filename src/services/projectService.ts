@@ -13,7 +13,6 @@ import {
   projectDeleted,
   projectUpdated,
   projectsAdded,
-  projectsCleared,
 } from "../store/projects";
 
 const ref = () => http.fs().collection("projects");
@@ -97,8 +96,6 @@ function remove(id: string) {
 }
 
 async function clear() {
-  store.dispatch(projectsCleared, { projects: [] });
-
   return ref()
     .get()
     .then(

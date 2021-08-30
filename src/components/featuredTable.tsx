@@ -15,11 +15,10 @@ class ProjectsTable extends Template {
       ),
     },
     { path: "description", label: "Description" },
-    { path: "sponsored", label: "Sponsored" },
-    { path: "type.name", label: "Type" },
+    { path: "sponsor", label: "Sponsor" },
     {
       key: "delete",
-      content: this.deleteContent(this.props.onDelete),
+      content: this.deleteButton(this.props.onDelete),
     },
   ];
 

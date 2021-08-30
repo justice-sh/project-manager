@@ -75,14 +75,14 @@ function getData() {
   const featured = [
     createFeatured(
       "Result management system",
-      true,
+      "Apata Memorial High School",
       types[0],
       "a system to automate the processes of result computation and management in secondary schools, thereby reducing the work to a few clicks of buttons. "
     ),
     createFeatured(
       "Project management system",
-      true,
-      types[0],
+      "Mikano International Limited",
+      types[1],
       "a system to keep track of all projects done by students in a university, available projects for students to do, as well as sponsored projects from companies who will be willing to pay/sponsor the student who would build the project, and possibly employ such student."
     ),
   ];
@@ -104,15 +104,15 @@ function createProject(title, author, regNo, type: ProjectType): Project {
 }
 
 function createFeatured(
-  title,
-  sponsored: boolean,
+  title: string,
+  sponsor: string,
   type: ProjectType,
-  description
+  description: string
 ): Featured {
   return {
     id: generatorId(),
     title,
-    sponsored,
+    sponsor,
     type,
     description,
     createdAt: Date.now(),

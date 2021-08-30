@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 import Table from "./table";
 import LottieAnimation from "./lottieAnimation";
@@ -23,14 +24,29 @@ export interface ProjectsTableState {}
 class ProjectsTable extends Component<ProjectsTableProps, ProjectsTableState> {
   columns: Column[] = []; // should be provided by the child component.
 
-  deleteContent(onDelete) {
+  viewButton(url) {
+    return function (project: Project) {
+      return (
+        <Link
+          to={`${url}/${project.id}`}
+          className="btn btn-info btn-sm"
+          data-aos="zoom-in-right"
+          data-aos-duration={1500}
+        >
+          View
+        </Link>
+      );
+    };
+  }
+
+  deleteButton(onDelete) {
     return function (project: Project) {
       return auth.getCurrentUser()?.isAdmin ? (
         <button
           onClick={() => onDelete(project)}
           className="btn btn-danger btn-sm"
           data-aos="zoom-in-right"
-          data-aos-duration={1500}
+          data-aos-duration={1000}
         >
           Delete
         </button>

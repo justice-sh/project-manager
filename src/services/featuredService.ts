@@ -11,7 +11,6 @@ import {
   featuredAdded,
   featuredRemoved,
   featuredUpdated,
-  cleared,
   featuredsAdded,
 } from "../store/featured";
 
@@ -63,8 +62,6 @@ function remove(id: string) {
 }
 
 function clear() {
-  store.dispatch(cleared, { list: [] });
-
   return ref()
     .get()
     .then(

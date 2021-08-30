@@ -1,14 +1,21 @@
 import React from "react";
 import Joi from "joi";
-import { RouteComponentProps } from "react-router-dom";
+
+import RouteProps from "../../types/routeProps";
+
 import Input from "./input";
 import Select, { SelectOption } from "./select";
+import Project from "../../types/project";
+import ProjectType from "../../types/projectType";
 
-export interface FormProps {}
+export interface FormProps extends RouteProps {
+  projects: Project[];
+  types: ProjectType[];
+}
 
 export interface FormState {}
 
-class Form extends React.Component<RouteComponentProps, FormState> {
+class Form extends React.Component<FormProps, FormState> {
   state = { data: {}, errors: {} };
 
   schema = {};
