@@ -14,6 +14,8 @@ export interface TableHeadState {}
 
 class TableHead extends React.Component<TableHeadProps, TableHeadState> {
   raiseSort = (path: string) => {
+    if (!path) return;
+
     let sortColumn = { ...this.props.sortColumn };
 
     if (sortColumn.path === path)
@@ -51,6 +53,9 @@ class TableHead extends React.Component<TableHeadProps, TableHeadState> {
 }
 
 const Thead = styled.thead`
+  position: sticky;
+  top: -2px;
+  z-index: 111;
   background-color: #007bff;
   color: white;
 `;

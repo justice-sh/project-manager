@@ -9,4 +9,7 @@ export default interface Project {
   createdAt: number;
   lastModified: number;
   type: ProjectType;
+  description: string;
+  sponsor: string;
+  taken: boolean;
 }

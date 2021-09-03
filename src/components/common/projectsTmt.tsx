@@ -4,7 +4,6 @@ import { ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 
 import SearchBox from "./searchBox";
-import Paginate from "./pagination";
 import ListGroup from "./listGroup";
 import LottieAnimation from "./lottieAnimation";
 
@@ -15,17 +14,15 @@ import SortColumn from "../../types/sortColumn";
 import projectService from "../../services/projectService";
 import auth from "../../services/authService";
 
-import { paginate } from "../../utils/paginate";
 import { sort } from "../../utils/sort";
 
 import loader from "../../media/loader.json";
 
 // eslint-disable-next-line
 import seed from "../../seed";
-import Featured from "../../types/featured";
 
 export interface TemplateProps {
-  projects: (Project | Featured)[];
+  projects: Project[];
   types: ProjectType[];
   isLoading: boolean;
 }
@@ -85,8 +82,7 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
   };
 
   getPagedData = () => {
-    const { searchQuery, pageSize, currentPage, selectedType, sortColumn } =
-      this.state;
+    const { searchQuery, selectedType, sortColumn } = this.state;
 
     const { projects } = this.props;
 
@@ -98,11 +94,9 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
       ? projects.filter((p) => p.type.id === selectedType.id)
       : projects;
 
-    const sorted = sort(filtered, sortColumn.path, sortColumn.order);
-
     return {
       totalCount: filtered.length,
-      data: paginate(sorted, currentPage, pageSize),
+      data: sort(filtered, sortColumn.path, sortColumn.order),
     };
   };
 
@@ -123,16 +117,9 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
   renderPage() {
     if (this.props.isLoading) return null;
 
-    const {
-      sortColumn,
-      searchQuery,
-      pageSize,
-      currentPage,
-      selectedType,
-      types,
-    } = this.state;
+    const { sortColumn, searchQuery, selectedType, types } = this.state;
 
-    const { data, totalCount } = this.getPagedData();
+    const { data } = this.getPagedData();
 
     this.setTypes();
 
@@ -150,11 +137,7 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
 
           <div className="col">
             {auth.getCurrentUser()?.isAdmin && (
-              <div
-                className="btn btn-group"
-                data-aos="zoom-in-right"
-                data-aos-duration="1000"
-              >
+              <div className="btn btn-group">
                 <Link to="/projectForm/new" className="btn btn-primary">
                   New Project
                 </Link>
@@ -167,13 +150,6 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
             <SearchBox query={searchQuery} onSearch={this.handleSearch} />
 
             {this.renderProjectsTable(data, sortColumn)}
-
-            <Paginate
-              pageSize={pageSize}
-              currentPage={currentPage}
-              itemsCount={totalCount}
-              onPageChange={this.handlePageChange}
-            />
           </div>
         </div>
       </>

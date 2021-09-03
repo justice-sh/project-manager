@@ -26,14 +26,19 @@ const Table: React.FC<TableProps> = ({ columns, sortColumn, data, onSort }) => {
 
 const Wrapper = styled.div`
   min-width: 250px;
+  max-height: 400px;
   border-radius: 7px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid #b5c6e0;
+  border-spacing: 10px 0px;
 
   &::-webkit-scrollbar {
-    width: 6px; // This line is not working. I don't know why.
+    width: 3px;
   }
 
   &::-webkit-scrollbar-track {
-    background-color: white;
+    background-color: #007bff;
   }
 
   &::-webkit-scrollbar-thumb {
@@ -42,7 +47,6 @@ const Wrapper = styled.div`
 
   .table {
     min-width: 800px;
-    height: 300px;
   }
 
   @media (max-width: 992px) {

@@ -2,11 +2,5 @@
   min-width: 300px;
   min-height: 100vh;
 
-  background: hsla(217, 100%, 50%, 1);
-
-  background: linear-gradient(
-    90deg,
-    hsla(186, 33%, 94%, 1) 0%,
-    hsla(216, 41%, 79%, 1) 100%
-  );
+  background: rgb(229, 230, 231);
 }

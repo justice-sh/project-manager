@@ -24,10 +24,10 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
     return this.getProperty(item, column.path);
   };
 
-  // rand = () => Math.random() * 1000;
-
   render() {
     const { data, columns, idProperty = "id" } = this.props;
+
+    console.log(data.length);
 
     return (
       <Tbody className="tbody">
@@ -36,7 +36,6 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
             key={item[idProperty]}
             className="tbody__tr"
             data-aos="flip-down"
-            data-aos-delay={index === 0 ? 100 : 200 * index}
             data-aos-duration={600}
           >
             {columns.map((column) => (
@@ -52,16 +51,8 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
 }
 
 const Tbody = styled.tbody`
-  border: 1px solid #b5c6e0;
-
-  .tbody__tr:nth-child(odd) .tbody__td {
-    color: black;
-    background-color: #b5c6e0;
-  }
-
-  .tbody__tr:nth-child(even) .tbody__td {
-    background-color: #ebf4f5;
-    color: black;
+  .tbody__tr {
+    background-color: #ffffff;
   }
 `;
 

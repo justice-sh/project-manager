@@ -85,6 +85,9 @@ class ProjectForm extends Form {
       session,
       createdAt: createdAt ? createdAt : Date.now(),
       lastModified: Date.now(),
+      description: "",
+      sponsor: "",
+      taken: false,
     };
   }
 

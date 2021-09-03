@@ -3,14 +3,9 @@ import { connect } from "react-redux";
 import FeaturedTable from "./featuredTable";
 import ProjectsTmt from "./common/projectsTmt";
 
-import featuredService from "../services/featuredService";
 import { RootState } from "../store";
 
 class FeaturedProjects extends ProjectsTmt {
-  componentDidMount() {
-    if (this.props.projects.length === 0) featuredService.registerListener();
-  }
-
   renderProjectsTable(data, sortColumn) {
     return (
       <FeaturedTable
@@ -33,7 +28,7 @@ class FeaturedProjects extends ProjectsTmt {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  projects: state.entities.featured,
+  projects: state.entities.projects.filter((p) => !p.taken),
   types: state.entities.types,
   isLoading: state.ui.isLoading,
   congrats: state.ui.congrats,

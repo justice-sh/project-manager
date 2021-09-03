@@ -29,7 +29,7 @@ class ProjectsTable extends Component<ProjectsTableProps, ProjectsTableState> {
       return (
         <Link
           to={`${url}/${project.id}`}
-          className="btn btn-info btn-sm"
+          className="btn btn-primary btn-sm"
           data-aos="zoom-in-right"
           data-aos-duration={1500}
         >

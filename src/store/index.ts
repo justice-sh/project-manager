@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import reducer from "./reducer";
 
-import { getLastProject } from "./projects";
+import { getLastProject, getProject } from "./projects";
 
 class Store {
   private store = configureStore({ reducer });
@@ -20,6 +20,10 @@ class Store {
 
   getLastProject() {
     return getLastProject(this.store.getState());
+  }
+
+  getProject(projectId: string) {
+    return getProject(projectId, this.store.getState());
   }
 }
 

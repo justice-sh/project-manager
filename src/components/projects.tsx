@@ -4,14 +4,9 @@ import ProjectsTable from "./projectsTable";
 
 import ProjTemplate from "./common/projectsTmt";
 
-import projectService from "../services/projectService";
 import { RootState } from "../store";
 
 class Projects extends ProjTemplate {
-  componentDidMount() {
-    if (this.props.projects.length === 0) projectService.registerListener();
-  }
-
   renderProjectsTable(data, sortColumn) {
     return (
       <ProjectsTable
@@ -34,7 +29,7 @@ class Projects extends ProjTemplate {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  projects: state.entities.projects,
+  projects: state.entities.projects.filter((p) => p.taken),
   types: state.entities.types,
   isLoading: state.ui.isLoading,
   congrats: state.ui.congrats,

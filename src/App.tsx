@@ -15,6 +15,7 @@ import ErrorPage from "./components/error";
 
 import auth from "./services/authService";
 import typeService from "./services/typeService";
+import projectService from "./services/projectService";
 
 import "./App.css";
 
@@ -22,9 +23,13 @@ function App() {
   useEffect(() => {
     AOS.init({
       once: true,
+      anchorPlacement: "top-bottom",
+      throttleDelay: 990,
+      startEvent: "DOMContentLoaded",
     });
 
     typeService.addListener();
+    projectService.registerListener();
   }, []);
 
   auth.setAuth(useAuth0());

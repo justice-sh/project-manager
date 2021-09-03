@@ -29,9 +29,6 @@ const ListGroup: React.FC<Props> = (props) => {
             key={item[idProperty]}
             className={classes(item)}
             onClick={() => onItemSelect(item)}
-            data-aos="fade-zoom-in"
-            data-aos-delay={index === 0 ? 200 : index * 400}
-            data-aos-duration={800}
           >
             {item[textProperty]}
           </li>
