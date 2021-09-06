@@ -14,13 +14,15 @@ function addListener() {
     next: (snapshot) => {
       const changes = snapshot.docChanges();
 
-      if (changes.length > 1 && changes[0].type) {
+      if (changes.length > 1 && changes[0].type === "added") {
         const types = changes.map((change) => change.doc.data());
         return store.dispatch(typesAdded, { types });
       }
 
-      if (changes[0].type === "added")
-        store.dispatch(typeAdded, { type: changes[0].doc.data() });
+      changes.forEach((change) => {
+        if (change.type === "added")
+          store.dispatch(typeAdded, { type: changes[0].doc.data() });
+      });
     },
 
     error: (error) => log(error),

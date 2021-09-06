@@ -2,6 +2,7 @@ import projectService from "./services/projectService";
 import typeService from "./services/typeService";
 
 import Project from "./types/project";
+import Sponsor from "./types/sponsor";
 
 import generatorId from "./utils/idGenerator";
 
@@ -40,13 +41,11 @@ function getData() {
       createdAt: 9,
       lastModified: 9,
       description: "",
-      sponsor: "",
-      taken: true,
+      sponsor: undefined,
     }),
     createProject({
       id: "",
-      sponsor: "",
-      taken: true,
+      sponsor: undefined,
       createdAt: 8,
       lastModified: 8,
       description: "",
@@ -59,8 +58,7 @@ function getData() {
     }),
     createProject({
       id: "",
-      sponsor: "",
-      taken: true,
+      sponsor: undefined,
       createdAt: 8,
       lastModified: 8,
       description: "",
@@ -73,8 +71,8 @@ function getData() {
     }),
     createProject({
       id: "",
-      sponsor: "",
-      taken: true,
+      sponsor: undefined,
+
       createdAt: 8,
       lastModified: 8,
       description: "",
@@ -86,8 +84,8 @@ function getData() {
     }),
     createProject({
       id: "",
-      sponsor: "",
-      taken: true,
+      sponsor: undefined,
+
       createdAt: 8,
       lastModified: 8,
       description: "",
@@ -100,8 +98,8 @@ function getData() {
     }),
     createProject({
       id: "",
-      sponsor: "",
-      taken: true,
+      sponsor: undefined,
+
       createdAt: 8,
       lastModified: 8,
       description: "",
@@ -114,12 +112,15 @@ function getData() {
     }),
     createProject({
       title: "Result management system",
-      sponsor: "Apata Memorial High School",
+      sponsor: getSponsor(
+        "Google",
+        "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+      ),
       type: types[0],
       description:
         "a system to automate the processes of result computation and management in secondary schools, thereby reducing the work to a few clicks of buttons. ",
       id: "",
-      taken: false,
+
       createdAt: 9,
       lastModified: 9,
       session: "",
@@ -128,12 +129,15 @@ function getData() {
     }),
     createProject({
       title: "Project management system",
-      sponsor: "Mikano International Limited",
+      sponsor: getSponsor(
+        "Mikano International Limited",
+        "https://www.mikano-intl.com/"
+      ),
       type: types[1],
       description:
         "a system to keep track of all projects done by students in a university, available projects for students to do, as well as sponsored projects from companies who will be willing to pay/sponsor the student who would build the project, and possibly employ such student.",
       id: "",
-      taken: false,
+
       createdAt: 9,
       lastModified: 9,
       session: "",
@@ -153,6 +157,7 @@ function createProject(project: Project) {
     createdAt: Date.now(),
     lastModified: Date.now(),
     description: getLorem(),
+    sponsor: project.sponsor || getSponsor("", ""),
   };
 }
 
@@ -164,4 +169,11 @@ function getSession() {
 
 function getLorem() {
   return "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda repellendus similique ut pariatur eum unde dolorum facilis animi cum inventore.";
+}
+
+function getSponsor(name, logoUrl): Sponsor {
+  return {
+    name,
+    logoUrl,
+  };
 }

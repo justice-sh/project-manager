@@ -38,11 +38,11 @@ export const projectSelector = (state: RootState) => ({
   projects: state.entities.projects,
 });
 
-export const getLastProject = (state: RootState) => {
+export const getLastProject = (state: RootState): Project => {
   const { length } = state.entities.projects;
   return state.entities.projects[length - 1];
 };
 
-export const getProject = (id: string, state: RootState) => {
+export const getProject = (id: string, state: RootState): Project => {
   return state.entities.projects.find((p) => p.id === id);
 };

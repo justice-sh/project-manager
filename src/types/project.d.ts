@@ -1,4 +1,5 @@
 import ProjectType from "./projectType";
+import Sponsor from "./sponsor";
 
 export default interface Project {
   id: string;
@@ -10,6 +11,5 @@ export default interface Project {
   lastModified: number;
   type: ProjectType;
   description: string;
-  sponsor: string;
-  taken: boolean;
+  sponsor: Sponsor;
 }

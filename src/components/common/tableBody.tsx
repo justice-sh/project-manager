@@ -27,8 +27,6 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
   render() {
     const { data, columns, idProperty = "id" } = this.props;
 
-    console.log(data.length);
-
     return (
       <Tbody className="tbody">
         {data.map((item, index) => (

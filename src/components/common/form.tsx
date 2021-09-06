@@ -1,10 +1,11 @@
 import React from "react";
 import Joi from "joi";
 
-import RouteProps from "../../types/routeProps";
-
 import Input from "./input";
 import Select, { SelectOption } from "./select";
+import TextArea from "./textArea";
+
+import RouteProps from "../../types/routeProps";
 import Project from "../../types/project";
 import ProjectType from "../../types/projectType";
 
@@ -107,6 +108,20 @@ class Form extends React.Component<FormProps, FormState> {
         label={label}
         onChange={this.handleChange}
         error={errors[name]}
+      />
+    );
+  }
+
+  renderTextArea(name, label) {
+    const { data, errors } = this.state;
+
+    return (
+      <TextArea
+        name={name}
+        label={label}
+        value={data[name]}
+        error={errors[name]}
+        onChange={this.handleChange}
       />
     );
   }

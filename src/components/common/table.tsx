@@ -37,20 +37,21 @@ const Wrapper = styled.div`
     width: 3px;
   }
 
-  &::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-thumb {
     background-color: #007bff;
   }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: #b5c6e0;
-  }
-
   .table {
+    margin-top: -5px;
     min-width: 800px;
   }
 
   @media (max-width: 992px) {
     overflow-x: auto;
+  }
+
+  @media (max-width: 400px) {
+    max-height: 80vh;
   }
 `;
 

@@ -24,19 +24,17 @@ export interface ProjectsTableState {}
 class ProjectsTable extends Component<ProjectsTableProps, ProjectsTableState> {
   columns: Column[] = []; // should be provided by the child component.
 
-  viewButton(url) {
-    return function (project: Project) {
-      return (
-        <Link
-          to={`${url}/${project.id}`}
-          className="btn btn-primary btn-sm"
-          data-aos="zoom-in-right"
-          data-aos-duration={1500}
-        >
-          View
-        </Link>
-      );
-    };
+  viewButton(project: Project) {
+    return (
+      <Link
+        to={`/projects/view/${project.id}`}
+        className="btn btn-primary btn-sm"
+        data-aos="zoom-in-right"
+        data-aos-duration={1500}
+      >
+        View
+      </Link>
+    );
   }
 
   deleteButton(onDelete) {
