@@ -16,7 +16,7 @@ class ProjectsTable extends Template {
     },
     { path: "type.name", label: "Type" },
     { path: "author", label: "Author" },
-    { key: "view", content: this.viewButton("/projects/view") },
+    { key: "view", content: this.viewButton },
     {
       key: "delete",
       content: this.deleteButton(this.props.onDelete),

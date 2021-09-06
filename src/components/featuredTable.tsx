@@ -15,7 +15,8 @@ class ProjectsTable extends Template {
       ),
     },
     { path: "description", label: "Description" },
-    { path: "sponsor", label: "Sponsor" },
+    { path: "sponsor.name", label: "Sponsor" },
+    { key: "view", content: this.viewButton },
     {
       key: "delete",
       content: this.deleteButton(this.props.onDelete),

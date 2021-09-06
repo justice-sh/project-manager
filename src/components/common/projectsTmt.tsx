@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
-import { Link } from "react-router-dom";
 
 import SearchBox from "./searchBox";
 import ListGroup from "./listGroup";
@@ -12,14 +11,10 @@ import ProjectType from "../../types/projectType";
 import SortColumn from "../../types/sortColumn";
 
 import projectService from "../../services/projectService";
-import auth from "../../services/authService";
 
 import { sort } from "../../utils/sort";
 
 import loader from "../../media/loader.json";
-
-// eslint-disable-next-line
-import seed from "../../seed";
 
 export interface TemplateProps {
   projects: Project[];
@@ -136,17 +131,6 @@ class ProjectsTmt extends React.Component<TemplateProps, TemplateState> {
           </RowColumn>
 
           <div className="col">
-            {auth.getCurrentUser()?.isAdmin && (
-              <div className="btn btn-group">
-                <Link to="/projectForm/new" className="btn btn-primary">
-                  New Project
-                </Link>
-                <button className="btn btn-danger" onClick={() => seed()}>
-                  Seed
-                </button>
-              </div>
-            )}
-
             <SearchBox query={searchQuery} onSearch={this.handleSearch} />
 
             {this.renderProjectsTable(data, sortColumn)}

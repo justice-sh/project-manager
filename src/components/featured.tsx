@@ -28,7 +28,7 @@ class FeaturedProjects extends ProjectsTmt {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  projects: state.entities.projects.filter((p) => !p.taken),
+  projects: state.entities.projects.filter((p) => !p.author),
   types: state.entities.types,
   isLoading: state.ui.isLoading,
   congrats: state.ui.congrats,

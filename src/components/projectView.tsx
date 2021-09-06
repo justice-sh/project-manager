@@ -20,13 +20,13 @@ function ProjectView(props: Props) {
         <Input name="Description" value={project.description} />
       </div>
 
-      {!project.sponsor && (
+      {project.sponsor.name && (
         <div className="view-sponsor">
-          <Input name="Sponsor" value={project.sponsor} />
+          <Input name="Sponsor" value={project.sponsor.name} />
         </div>
       )}
 
-      {project.taken && (
+      {project.author && (
         <div className="view-student">
           <Input name="Student" value={project.author} />
           <Input name="Reg. No." value={project.regNo} />
