@@ -1,23 +1,20 @@
-import { Route, Redirect, RouteProps } from "react-router-dom";
-// import auth from "../../services/authService";
+import { Route, Redirect } from "react-router-dom";
+import auth from "../../services/authService";
 
-const ProtectedRoute: React.FC<RouteProps> = (props) => {
+interface Props {
+  path: string;
+  component?: any;
+  render?: (props: any) => void;
+}
+
+const ProtectedRoute: React.FC<Props> = (props) => {
   const { component: Component, render, ...rest } = props;
 
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (false)
-          return (
-            <Redirect
-              to={{
-                pathname: "/login",
-                state: { from: props.location },
-              }}
-            />
-          );
-
+        if (!auth.getCurrentUser()) return <Redirect to="/please_login" />;
         return Component ? <Component {...props} /> : render(props);
       }}
     />

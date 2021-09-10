@@ -4,6 +4,8 @@ import ProjectsTable from "./projectsTable";
 
 import ProjTemplate from "./common/projectsTmt";
 
+import Congrats from "./congrats";
+
 import { RootState } from "../store";
 
 class Projects extends ProjTemplate {
@@ -21,6 +23,7 @@ class Projects extends ProjTemplate {
   render() {
     return (
       <div>
+        {this.props.congrats && <Congrats />}
         {this.renderLoader()}
         {this.renderPage()}
       </div>

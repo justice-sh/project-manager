@@ -40,7 +40,7 @@ const Wrapper = styled.div`
   left: 1px;
   width: 99%;
   height: 80%;
-  z-index: 111;
+  z-index: 11111;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -20,6 +20,7 @@ export interface TemplateProps {
   projects: Project[];
   types: ProjectType[];
   isLoading: boolean;
+  congrats: boolean;
 }
 
 export interface TemplateState {

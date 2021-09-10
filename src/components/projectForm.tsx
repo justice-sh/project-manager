@@ -10,6 +10,9 @@ import SelectOption from "../types/selectOption";
 import projectService from "../services/projectService";
 import auth from "../services/authService";
 
+import store from "../store";
+import { congratsToggled } from "../store/ui";
+
 import generatorId from "../utils/idGenerator";
 
 class ProjectForm extends Form {
@@ -26,6 +29,7 @@ class ProjectForm extends Form {
       description: "",
     },
     options: [],
+    previousAuthor: "",
     errors: {},
   };
 
@@ -33,9 +37,9 @@ class ProjectForm extends Form {
     title: Joi.string().min(3).label("Title").required(),
     typeId: Joi.string().label("Type of Project").required(),
     description: Joi.string().min(20).label("Project description").required(),
-    author: Joi.string().min(3).label("Name of Student").required(),
-    regNo: Joi.string().min(9).label("Registration Number").required(),
-    session: Joi.string().min(9).label("Session").required(),
+    author: Joi.string().min(3).label("Name of Student").allow(""),
+    regNo: Joi.string().min(9).label("Registration Number").allow(""),
+    session: Joi.string().min(9).label("Session").allow(""),
     sponsor: Joi.string().allow(""),
     sponsorLogoUrl: Joi.string().allow(""),
     createdAt: Joi.number(),
@@ -54,9 +58,12 @@ class ProjectForm extends Form {
 
     const project = projects.find((p) => p.id === id);
 
-    if (!project) return this.props.history.push("/projects");
+    if (!project) return this.props.history.replace("/projects");
 
-    this.setState({ data: this.mapProjectToData(project) });
+    this.setState({
+      data: this.mapProjectToData(project),
+      previousAuthor: project.author,
+    });
   }
 
   mapProjectToData = (project: Project) => {
@@ -79,9 +86,12 @@ class ProjectForm extends Form {
   });
 
   mapDataToProject(): Project {
-    const { data } = this.state;
+    const { data, previousAuthor } = this.state;
 
     const { id } = this.props.match.params;
+
+    if (!previousAuthor && data.author)
+      store.dispatch(congratsToggled, { congrats: true });
 
     return {
       id: id === "new" ? generatorId() : id,
