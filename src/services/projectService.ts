@@ -6,7 +6,6 @@ import http from "./httpService";
 import log from "./logService";
 
 import store from "../store";
-import { congratsToggled } from "../store/ui";
 import { loaded } from "../store/ui";
 import {
   projectAdded,
@@ -39,9 +38,7 @@ function registerListener() {
         else if (type === "removed")
           store.dispatch(projectDeleted, { project });
 
-        type === "added"
-          ? store.dispatch(congratsToggled, { congrats: true })
-          : toast.info(`Project ${type}`);
+        toast.info(`Project ${type}`);
       });
     },
     error: (error) => log(error),

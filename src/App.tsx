@@ -13,6 +13,8 @@ import Login from "./components/login";
 import Logout from "./components/logout";
 import ErrorPage from "./components/error";
 
+import ProtectedRoute from "./components/common/protectedRoute";
+
 import auth from "./services/authService";
 import typeService from "./services/typeService";
 import projectService from "./services/projectService";
@@ -23,8 +25,6 @@ function App() {
   useEffect(() => {
     AOS.init({
       once: true,
-      anchorPlacement: "top-bottom",
-      throttleDelay: 990,
       startEvent: "DOMContentLoaded",
     });
 
@@ -42,7 +42,7 @@ function App() {
         <NavBar user={user} />
 
         <Switch>
-          <Route path="/projectForm/:id" component={ProjectForm} />
+          <ProtectedRoute path="/projectForm/:id" component={ProjectForm} />
           <Route path="/projects/view/:id" component={ProjectView} />
           <Route path="/projects" component={Projects} />
           <Route path="/featured" component={Featured} />

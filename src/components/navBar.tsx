@@ -42,9 +42,9 @@ const NavBar: React.FC<NavBarProps> = ({ user }) => {
             )}
             {user && (
               <>
-                <NavLink className="nav-link nav-item" to="/profile">
+                {/* <NavLink className="nav-link nav-item" to="/profile">
                   {user.name}
-                </NavLink>
+                </NavLink> */}
                 <NavLink className="nav-link nav-item" to="/logout">
                   Logout
                 </NavLink>

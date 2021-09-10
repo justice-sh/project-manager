@@ -25,13 +25,13 @@ class TableBody extends React.Component<TableBodyProps, TableBodyState> {
   };
 
   render() {
-    const { data, columns, idProperty = "id" } = this.props;
+    const { data, columns } = this.props;
 
     return (
       <Tbody className="tbody">
         {data.map((item, index) => (
           <tr
-            key={item[idProperty]}
+            key={index}
             className="tbody__tr"
             data-aos="flip-down"
             data-aos-duration={600}
